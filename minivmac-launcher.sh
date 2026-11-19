@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
+
 # Native Mini vMac: Macintosh Plus (68000) with System 6.0.8.
 # Choose which disks from Disks/ to mount and remember the last selection.
+
 set -euo pipefail
 cd "$(dirname "$0")"
 
