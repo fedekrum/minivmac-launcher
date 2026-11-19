@@ -9,6 +9,19 @@ A small bash terminal user interface for choosing which disk images to mount and
 - Read-only toggle for disk images, marked with `ø`.
 - Opens Mini vMac on a new Hyprland desktop and returns to the previous one when it is empty.
 
+## Shortcuts
+
+```
+┌─ Shortcuts ──────────────────────────────┐
+│ [↑/↓] move              [S] Startup Disk │
+│ [Space] Select          [Enter] start    │
+│ [Ctrl+A] all/none       [Esc] cancel     │
+│ [L] lock                                 │
+└──────────────────────────────────────────┘
+```
+
+`[Space]` selects a disk or expands/collapses a folder. `[L]` toggles read-only on the current disk.
+
 ## Installation
 
 1. Clone the repo:
