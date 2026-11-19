@@ -1,7 +1,6 @@
 # Mini vMac Launcher
 
-A small bash TUI for choosing which disk images to mount in native Mini vMac. It starts the emulator fullscreen and remembers your selection between runs. The interface is in English and calls the boot disk the **Startup Disk**, as the Mac does.
-
+A small bash terminal user interface for choosing which disk images to mount and startup in native Mini vMac. It starts the emulator fullscreen and remembers your selection between runs.
 ## Main features
 
 - Recursive disk browser for `Disks/`, including subfolders.
