@@ -4,6 +4,16 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# --- setup ---------------------------------------------------------------
+# Mini vMac binary. Relative paths are resolved from this script's folder.
+MINIVMAC_APP='./minivmac'
+
+# ROM image. Comment out or remove this line to use Mini vMac's own default.
+MINIVMAC_ROM='Mac-Plus.rom'
+
+# Speed is set at build time (-speed z = 1x); Mini vMac has no speed flag.
+# -------------------------------------------------------------------------
+
 # If launched without a terminal (for example from the app menu),
 # open one so the list can be displayed.
 if [[ ! -t 0 || ! -t 1 ]]; then
@@ -614,7 +624,12 @@ if [[ -n ${HYPRLAND_INSTANCE_SIGNATURE-} ]] && command -v hyprctl >/dev/null 2>&
 fi
 
 status=0
-./minivmac -r Mac-Plus.rom "${args[@]}" || status=$?
+cmd=("$MINIVMAC_APP")
+if [[ -n ${MINIVMAC_ROM:-} ]]; then
+	cmd+=(-r "$MINIVMAC_ROM")
+fi
+cmd+=("${args[@]}")
+"${cmd[@]}" || status=$?
 
 # If we are still on the desktop we opened and it is empty, go back.
 if [[ -n $new_ws ]]; then

@@ -1,6 +1,18 @@
 # Mini vMac Launcher
 
 A small bash terminal user interface for choosing which disk images to mount and startup in native Mini vMac. It starts the emulator fullscreen and remembers your selection between runs.
+
+## Setup
+
+The first lines of `minivmac-launcher.sh` configure the emulator:
+
+```sh
+MINIVMAC_APP='./minivmac'    # binary, relative to this script's folder
+MINIVMAC_ROM='Mac-Plus.rom'  # comment out to use Mini vMac's default ROM
+```
+
+Mini vMac has no command-line speed option. This build runs at 1x speed (`-speed z`); speed can be changed from Mini vMac's control panel while it is running.
+
 ## Main features
 
 - Recursive disk browser for `Disks/`, including subfolders.
