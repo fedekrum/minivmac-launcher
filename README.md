@@ -5,6 +5,7 @@ A small bash TUI for choosing which disk images to mount in native Mini vMac. It
 ## Main features
 
 - Recursive disk browser for `Disks/`, including subfolders.
+- Folders containing a selected disk open automatically at startup.
 - Selection is saved automatically in `.selected-disks`; the Startup Disk is passed to Mini vMac first.
 - Read-only toggle for disk images, marked with `ø`.
 - Opens Mini vMac on a new Hyprland desktop and returns to the previous one when it is empty.

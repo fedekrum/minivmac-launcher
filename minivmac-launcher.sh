@@ -214,6 +214,18 @@ fi
 # Last disk marked with S; remembered even if everything is unselected.
 last_boot=$boot_path
 
+# Open every folder containing a selected disk (and its parents) on startup,
+# so the selection is visible even in nested folders.
+for f in "${all_files[@]}"; do
+	if [[ -n ${selected[$f]+x} ]]; then
+		d=$(dirname "$f")
+		while [[ $d != "." ]]; do
+			expanded[$d]=1
+			d=$(dirname "$d")
+		done
+	fi
+done
+
 # --- menu ---------------------------------------------------------------
 
 # Number of selected disks inside each folder, including subfolders.
