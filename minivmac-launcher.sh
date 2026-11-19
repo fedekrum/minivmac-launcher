@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 # If launched without a terminal (for example from the app menu),
 # open one so the list can be displayed.
 if [[ ! -t 0 || ! -t 1 ]]; then
-	self=$(readlink -f "$0")
+	self=$(cd "$(dirname "$0")" && pwd -P)/$(basename "$0")
 	if command -v omarchy-launch-tui >/dev/null 2>&1; then
 		exec omarchy-launch-tui --app-id=org.fede.minivmac "$self" "$@"
 	fi
@@ -18,7 +18,12 @@ if [[ ! -t 0 || ! -t 1 ]]; then
 	exit 1
 fi
 
-state_file=".discos-seleccionados"
+state_file=".selected-disks"
+# Read the old Spanish name once, so an existing selection is not lost.
+read_state_file=$state_file
+if [[ ! -f $read_state_file && -f .discos-seleccionados ]]; then
+	read_state_file='.discos-seleccionados'
+fi
 
 # --- available disks (including subfolders) -----------------------------
 
@@ -138,7 +143,7 @@ build_visible() {
 
 declare -A saved=()
 first_saved=""
-if [[ -f $state_file ]]; then
+if [[ -f $read_state_file ]]; then
 	while IFS= read -r line; do
 		if [[ -n $line ]]; then
 			saved[$line]=1
@@ -146,7 +151,7 @@ if [[ -f $state_file ]]; then
 				first_saved=$line
 			fi
 		fi
-	done < "$state_file"
+	done < "$read_state_file"
 fi
 
 declare -A selected=()
@@ -167,7 +172,7 @@ have_selection() {
 }
 
 # On first run, start with the system disk.
-if [[ ! -f $state_file ]]; then
+if [[ ! -f $read_state_file ]]; then
 	for f in "${all_files[@]}"; do
 		if [[ ${f,,} == *system* ]]; then
 			selected[$f]=1
